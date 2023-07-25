@@ -1,0 +1,9 @@
+.env
+.DS_Store
+docker-compose.yml
+apache/vhosts/*
+!apache/vhosts/000-dev.conf
+!apache/vhosts/example.conf
+nginx/vhosts/*
+!nginx/vhosts/000-dev.conf
+!nginx/vhosts/example.test.conf

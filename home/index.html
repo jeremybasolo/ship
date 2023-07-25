@@ -1,0 +1,104 @@
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+
+	<title>DEV</title>
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Mono" rel="stylesheet">
+	<link href="animate.css" rel="stylesheet">
+
+	<style>
+		body {
+			background: #222;
+		}
+		#main {
+			font-family: 'Ubuntu Mono', sans-serif;
+			max-width: 780px;
+			margin: 1em auto;
+		}
+		.links {
+			text-align: center;
+			padding: 10px 0;
+			color: #fff;
+			text-transform: uppercase;
+		}
+		a {
+			color: #00ff99;
+			font-weight: bold;
+		}
+		img {
+			max-width: 100px;
+			display: inline-block; 
+			clear: both;
+		}
+		h1 {
+			font-size: 1.5em;
+			text-align: center;
+			margin-top: 20px;
+			color: #00ff99;
+		}
+		h1 span {
+			display: block; 
+			margin: 10px auto 0;
+			letter-spacing: 15px;
+			padding-left: 15px;
+		}
+		.terminal {
+			padding: 1em 2em 1.5em;
+			background: #111;
+			color: #fff;
+			margin-top: 20px;
+		}
+		li {
+			list-style: square;
+		}
+		input {
+			background: none;
+			width: 100%;
+			font-size: .85em;
+			color: #00ff99;
+			border: 0;
+			font-family: 'Ubuntu Mono', sans-serif;
+			outline: none;
+		}
+		hr {
+			border: 0;
+			border-top: 5px solid #333;
+		}
+	</style>
+
+</head>
+
+<body>
+    <div id="main">
+        <h1 class="animated flipInX"><img src="logo.png"><span>SHIP</span></h1>
+		<div class="links">
+			<a target="_blank" href="http://localhost:8889">PhpMyAdmin</a>
+			|
+			<a target="_blank" href="http://localhost:8025">Mailhog</a>
+			|
+			<a target="_blank" href="https://docs.docker.com/">Docker docs</a>
+		</div>
+				<div class="terminal animated fadeInUp faster">
+					
+					<h3 class="unroll">
+						php, nginx, apache, mysql, phpmyadmin, mailhog 
+					</h3>
+					<hr>
+					<p>Start all services: <input readonly value="docker-compose up -d"></p>
+					<p>Stop all services: <input readonly value="docker-compose down"></p>
+					<p>Watch logs: <input readonly value="docker-compose logs -f"></p>
+					<p>Delete the nginx container: <input readonly value="docker container rm -f ep-nginx"></p>
+					<p>Delete image ep-dev_php7.4: <input readonly value="docker image rm ep-dev_php7.4"></p>
+					<p>Bash in the container php8.1: <input readonly value="docker container exec -it ep-php81 bash"></p>
+					<p>Import a SQL file in a database: <input readonly value="docker container exec -i ep-mysql mysql -uroot -pdocker BDD_NAME < export.sql"></p>
+					<p>Delete .Identifier files in the current folder (auto-generated files when you copy files from Windows to WSL...): <input readonly value="find ./ -type f -iname '*.Identifier' -exec rm -rfv {} +"></p>
+			</div>
+    </div>
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script>
+		$("input").click(function () {
+				$(this).select();
+		});
+	</script>
+</body>
+</html>

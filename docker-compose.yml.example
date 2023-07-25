@@ -1,0 +1,119 @@
+version: '3'
+
+services:
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: ep-mailhog
+    restart: always
+    logging:
+      driver: 'none'
+    ports:
+      - 8025:8025
+      - 1025:1025
+    networks:
+      - ep_network
+
+  # php7.4:
+  #   build: ./php-7.4/
+  #   container_name: ep-php74
+  #   restart: always
+  #   links:
+  #     - mysql
+  #     - apache
+  #   volumes:
+  #     - /home/USER_NAME/sites/:/var/www/html/
+  #     - ./php-7.4/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
+  #   networks:
+  #     - ep_network
+
+  # php8.0:
+  #   build: ./php-8.0/
+  #   container_name: ep-php8
+  #   restart: always
+  #   links:
+  #     - mysql
+  #   volumes:
+  #     - /home/USER_NAME/sites/:/var/www/html/
+  #     - ./php-8.0/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
+  #   networks:
+  #     - ep_network
+
+  php8.1:
+    build: ./php-8.1/
+    container_name: ep-php81
+    restart: always
+    links:
+      - mysql
+    volumes:
+      - /home/USER_NAME/sites/:/var/www/html/
+      - ./php-8.1/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
+    networks:
+      - ep_network
+
+  # apache:
+  #   build: ./apache/
+  #   container_name: ep-apache
+  #   restart: always
+  #   depends_on:
+  #     - mysql
+  #   ports: 
+  #     - 80:80
+  #   volumes:
+  #     - /home/USER_NAME/sites:/var/www/html/
+  #     - ./home/:/var/www/home/
+  #     - ./apache/vhosts/:/usr/local/apache2/vhosts/
+  #   networks:
+  #     ep_network:
+  #       aliases:
+  #         - test.jb
+
+  nginx:
+    build: ./nginx/
+    container_name: ep-nginx
+    restart: always
+    depends_on:
+      - mysql
+    ports: 
+      - 80:80
+    volumes:
+      - /home/USER_NAME/sites:/var/www/html/
+      - ./home/:/var/www/home/
+      - ./nginx/vhosts/:/etc/nginx/conf.d/
+    networks:
+      ep_network:
+        
+  mysql:
+    image: mysql:5.7
+    container_name: ep-mysql
+    restart: 'always'
+    command: --max_allowed_packet=32505856
+    environment:
+      MYSQL_ROOT_PASSWORD: docker
+    ports: 
+      - 3306:3306
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - ep_network
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: ep-pma
+    restart: always
+    ports:
+      - 8889:80
+    environment:
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=docker
+      - UPLOAD_LIMIT=1024M
+    networks:
+      - ep_network
+
+volumes:
+  mysql-data:
+
+networks:
+    ep_network:
+      driver: bridge
