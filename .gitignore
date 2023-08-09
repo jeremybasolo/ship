@@ -1,6 +1,7 @@
 .env
 .DS_Store
 docker-compose.yml
+new-site.sh
 apache/vhosts/*
 !apache/vhosts/000-dev.conf
 !apache/vhosts/example.conf

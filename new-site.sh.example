@@ -1,0 +1,49 @@
+#!/bin/bash -e
+
+read -p "Domain:" sitedomain
+read -p "Public path:" sitepath
+
+echo $sitedomain
+echo $sitepath
+
+if [ ! -f '/home/USER_NAME/ship/nginx/vhosts/$sitedomain.conf' ]; then
+
+    touch /home/USER_NAME/ship/nginx/vhosts/$sitedomain.conf
+
+    echo "
+        server {
+        listen 0.0.0.0:80;
+        listen [::]:80;
+        
+        root /var/www/html/$sitepath/;
+        index index.php index.html index.htm;
+
+        server_name $sitedomain;
+
+        client_max_body_size 128m;
+
+        location / {
+            try_files \$uri \$uri/ /index.php?\$args;
+        }
+        location ~ [^/]\.php(/|$) {
+
+            fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+            if (!-f \$document_root\$fastcgi_script_name) {
+                return 404;
+            }
+
+            include fastcgi_params;
+            fastcgi_pass php8.1:9000;
+            fastcgi_index index.php;
+            fastcgi_param SCRIPT_FILENAME \$document_root/\$fastcgi_script_name;
+
+        }
+    }
+    " >> /home/USER_NAME/ship/nginx/vhosts/$sitedomain.conf
+
+fi
+
+docker-compose down
+docker-compose up -d
+
+"/mnt/c/Program Files/gsudo/Current/gsudo.exe" "echo 127.0.0.1 $sitedomain >> C:/Windows/System32/drivers/etc/hosts.ics"
