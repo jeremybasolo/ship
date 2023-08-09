@@ -43,4 +43,4 @@ It can be installed with a command to execute in **PowerShell** open as administ
 PowerShell -Command "Set-ExecutionPolicy RemoteSigned -scope Process; [Net.ServicePointManager]::SecurityProtocol = 'Tls12'; iwr -useb https://raw.githubusercontent.com/gerardog/gsudo/master/installgsudo.ps1 | iex"
 ```
 
-This is so the shell script to run in the wsl2 terminal can edit the hosts file on windows, so the local domain can point to 127.0.0.1.
+This allows the **shell script** to be run in the **WSL2 terminal** to edit the **hosts** file on **Windows**, so the local domain can point to **127.0.0.1**.
