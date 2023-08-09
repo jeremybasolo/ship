@@ -4,7 +4,7 @@ services:
 
   mailhog:
     image: mailhog/mailhog:latest
-    container_name: ep-mailhog
+    container_name: ship-mailhog
     restart: always
     logging:
       driver: 'none'
@@ -12,11 +12,11 @@ services:
       - 8025:8025
       - 1025:1025
     networks:
-      - ep_network
+      - ship_network
 
   # php7.4:
   #   build: ./php-7.4/
-  #   container_name: ep-php74
+  #   container_name: ship-php74
   #   restart: always
   #   links:
   #     - mysql
@@ -25,11 +25,11 @@ services:
   #     - /home/USER_NAME/sites/:/var/www/html/
   #     - ./php-7.4/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
   #   networks:
-  #     - ep_network
+  #     - ship_network
 
   # php8.0:
   #   build: ./php-8.0/
-  #   container_name: ep-php8
+  #   container_name: ship-php8
   #   restart: always
   #   links:
   #     - mysql
@@ -37,11 +37,11 @@ services:
   #     - /home/USER_NAME/sites/:/var/www/html/
   #     - ./php-8.0/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
   #   networks:
-  #     - ep_network
+  #     - ship_network
 
   php8.1:
     build: ./php-8.1/
-    container_name: ep-php81
+    container_name: ship-php81
     restart: always
     links:
       - mysql
@@ -49,11 +49,11 @@ services:
       - /home/USER_NAME/sites/:/var/www/html/
       - ./php-8.1/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
     networks:
-      - ep_network
+      - ship_network
 
   # apache:
   #   build: ./apache/
-  #   container_name: ep-apache
+  #   container_name: ship-apache
   #   restart: always
   #   depends_on:
   #     - mysql
@@ -64,13 +64,13 @@ services:
   #     - ./home/:/var/www/home/
   #     - ./apache/vhosts/:/usr/local/apache2/vhosts/
   #   networks:
-  #     ep_network:
+  #     ship_network:
   #       aliases:
   #         - test.jb
 
   nginx:
     build: ./nginx/
-    container_name: ep-nginx
+    container_name: ship-nginx
     restart: always
     depends_on:
       - mysql
@@ -81,11 +81,11 @@ services:
       - ./home/:/var/www/home/
       - ./nginx/vhosts/:/etc/nginx/conf.d/
     networks:
-      ep_network:
+      ship_network:
         
   mysql:
     image: mysql:5.7
-    container_name: ep-mysql
+    container_name: ship-mysql
     restart: 'always'
     command: --max_allowed_packet=32505856
     environment:
@@ -95,11 +95,11 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
     networks:
-      - ep_network
+      - ship_network
 
   phpmyadmin:
     image: phpmyadmin
-    container_name: ep-pma
+    container_name: ship-pma
     restart: always
     ports:
       - 8889:80
@@ -109,11 +109,11 @@ services:
       - PMA_PASSWORD=docker
       - UPLOAD_LIMIT=1024M
     networks:
-      - ep_network
+      - ship_network
 
 volumes:
   mysql-data:
 
 networks:
-    ep_network:
+    ship_network:
       driver: bridge
