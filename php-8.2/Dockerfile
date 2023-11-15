@@ -1,4 +1,4 @@
-FROM php:8.0-fpm
+FROM php:8.2-fpm
 
 RUN apt-get update -y \
   && apt-get install -y libxml2-dev zlib1g-dev libpng-dev libjpeg-dev libfreetype6-dev libzip-dev less zip unzip vim wget git \

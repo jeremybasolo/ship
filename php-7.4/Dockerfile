@@ -24,4 +24,3 @@ RUN wget https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendma
     
 USER www-data
 ENV PS1="\u@\w\\$ "
-ENV PATH="/usr/local/bin/perfeo-sh:${PATH}"

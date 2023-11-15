@@ -11,7 +11,7 @@ RUN apt-get update -y \
   && docker-php-ext-install intl \
   && docker-php-ext-install zip
 
-RUN pecl install xdebug && docker-php-ext-enable xdebug
+# RUN pecl install xdebug && docker-php-ext-enable xdebug
   
 RUN docker-php-ext-configure gd --with-jpeg=/usr/include/ \
     && docker-php-ext-install gd
@@ -24,4 +24,3 @@ RUN wget https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendma
     
 USER www-data
 ENV PS1="\u@\w\\$ "
-ENV PATH="/usr/local/bin/perfeo-sh:${PATH}"
