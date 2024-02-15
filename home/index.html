@@ -87,10 +87,10 @@
 					<p>Start all services: <input readonly value="docker-compose up -d"></p>
 					<p>Stop all services: <input readonly value="docker-compose down"></p>
 					<p>Watch logs: <input readonly value="docker-compose logs -f"></p>
-					<p>Delete the nginx container: <input readonly value="docker container rm -f ep-nginx"></p>
-					<p>Delete image ep-dev_php7.4: <input readonly value="docker image rm ep-dev_php7.4"></p>
-					<p>Bash in the container php8.1: <input readonly value="docker container exec -it ep-php81 bash"></p>
-					<p>Import a SQL file in a database: <input readonly value="docker container exec -i ep-mysql mysql -uroot -pdocker BDD_NAME < export.sql"></p>
+					<p>Delete the nginx container: <input readonly value="docker container rm -f ship-nginx"></p>
+					<p>Delete image ship-php7.4: <input readonly value="docker image rm ship-php7.4"></p>
+					<p>Bash in the container php8.1: <input readonly value="docker container exec -it ship-php8.1 bash"></p>
+					<p>Import a SQL file in a database: <input readonly value="docker container exec -i ship-mysql mysql -uroot -pdocker BDD_NAME < export.sql"></p>
 					<p>Delete .Identifier files in the current folder (auto-generated files when you copy files from Windows to WSL...): <input readonly value="find ./ -type f -iname '*.Identifier' -exec rm -rfv {} +"></p>
 			</div>
     </div>
